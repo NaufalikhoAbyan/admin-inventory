@@ -3,7 +3,7 @@
 @section('title', 'Kategori')
 
 @section('content')
-    <div class="bg-white border">
+    <div class="bg-white border shadow-lg">
         <div class="text-main font-bold secondary-bg p-4">Tabel Kategori</div>
         <div class="p-4">
             <div class="flex justify-between">
@@ -11,10 +11,10 @@
                     Show
                     <form id="paginationForm" action="/kategori" method="GET" class="mx-2">
                         <select name="paginationValue" class="border rounded p-1" onchange="getSubmit(this.value)">
-                            <option value="1" {{$_GET['paginationValue'] == '1' ? 'selected' : ''}}>1</option>
-                            <option value="2" {{$_GET['paginationValue'] == '2' ? 'selected' : ''}}>2</option>
-                            <option value="3" {{$_GET['paginationValue'] == '3' ? 'selected' : ''}}>3</option>
-                            <option value="4" {{$_GET['paginationValue'] == '4' ? 'selected' : ''}}>4</option>
+                            <option value="1" {{isset($_GET['paginationValue']) == '1' ? 'selected' : ''}}>1</option>
+                            <option value="2" {{isset($_GET['paginationValue']) == '2' ? 'selected' : ''}}>2</option>
+                            <option value="3" {{isset($_GET['paginationValue']) == '3' ? 'selected' : ''}}>3</option>
+                            <option value="4" {{isset($_GET['paginationValue']) == '4' ? 'selected' : ''}}>4</option>
                         </select> 
                     {{-- </form> --}}
                     entries 
@@ -22,10 +22,13 @@
                 <div class="flex items-center">
                     Search: 
                     {{-- <form action="" class="ml-2 flex items-center"> --}}
-                        <input type="text" class="border rounded p-1" placeholder="Search for" name="search" value={{$_GET['search']}}>                   
+                        <input type="text" class="border rounded p-1" placeholder="Search for" name="search" value={{isset($_GET['search'])}}>                   
                         <button type="submit"><i class="fa-solid fa-magnifying-glass p-2 main-bg text-white rounded ml-1"></i></button>
                     </form>
                 </div>
+            </div>
+            <div class="mt-6">
+                <a href="/kategori/create" class="main-bg text-white p-2 rounded">Tambah Kategori</a>
             </div>
             <table class="table-auto border-collapse w-full mt-6">
                 <thead>
@@ -33,6 +36,7 @@
                         <th class="border-2">ID</th>
                         <th class="border-2">Deskripsi</th>
                         <th class="border-2">Kategori</th>
+                        <th class="border-2">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,6 +45,12 @@
                         <td class="border-2 text-center">{{$item->id}}</td>
                         <td class="border-2">{{$item->deskripsi}}</td>
                         <td class="border-2 text-center">{{$item->kategori}}</td>
+                        <td class="border-2 text-center">
+                            <div>
+                                <i class="fa-solid fa-pen-to-square text-white warning-bg p-2 rounded"></i>
+                                <i class="fa-solid fa-trash-can text-white danger-bg p-2 rounded"></i>
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

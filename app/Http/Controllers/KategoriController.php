@@ -24,7 +24,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        return view('kategori.create');
     }
 
     /**
@@ -32,7 +32,12 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'deskripsi' => 'required',
+            'kategori' => 'required',
+        ]);
+        Kategori::create($data);
+        return redirect()->route('kategori.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
