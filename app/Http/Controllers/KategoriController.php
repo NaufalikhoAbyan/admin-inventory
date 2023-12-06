@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class KategoriController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->search ?? '';
+        $paginationValue = $request->paginationValue ?? 4;
         return view('kategori.index', [
-            'data' => DB::table('kategori')->paginate(10)
+            'data' => Kategori::where('kategori', 'like', "%$search%")->orWhere('deskripsi', 'like', "%$search%")->paginate($paginationValue)->withQueryString()
         ]);
     }
 
