@@ -8,6 +8,15 @@
     <div class="p-4">
         <form action={{route('kategori.store')}} method="POST">
             @csrf
+            @if ($errors->any())
+                <div class="text-red-500">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <label for="deskripsi">Deskripsi</label>
             <input type="text" name="deskripsi" id="deskripsi" class="border rounded p-1 w-full">
 

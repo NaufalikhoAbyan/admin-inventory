@@ -3,6 +3,14 @@
 @section('title', 'Kategori')
 
 @section('content')
+    @php
+        if (!isset($_GET['paginationValue'])) {
+            $_GET['paginationValue'] = '1'; 
+        }
+        if (!isset($_GET['search'])) {
+            $_GET['search'] = ' '; 
+        }
+    @endphp
     <div class="bg-white border shadow-lg">
         <div class="text-main font-bold secondary-bg p-4">Tabel Kategori</div>
         <div class="p-4">
@@ -11,10 +19,10 @@
                     Show
                     <form id="paginationForm" action="/kategori" method="GET" class="mx-2">
                         <select name="paginationValue" class="border rounded p-1" onchange="getSubmit(this.value)">
-                            <option value="1" {{isset($_GET['paginationValue']) == '1' ? 'selected' : ''}}>1</option>
-                            <option value="2" {{isset($_GET['paginationValue']) == '2' ? 'selected' : ''}}>2</option>
-                            <option value="3" {{isset($_GET['paginationValue']) == '3' ? 'selected' : ''}}>3</option>
-                            <option value="4" {{isset($_GET['paginationValue']) == '4' ? 'selected' : ''}}>4</option>
+                            <option value="1" {{$_GET['paginationValue'] == '1' ? 'selected' : ''}}>1</option>
+                            <option value="2" {{$_GET['paginationValue'] == '2' ? 'selected' : ''}}>2</option>
+                            <option value="3" {{$_GET['paginationValue'] == '3' ? 'selected' : ''}}>3</option>
+                            <option value="4" {{$_GET['paginationValue'] == '4' ? 'selected' : ''}}>4</option>
                         </select> 
                     {{-- </form> --}}
                     entries 
@@ -22,7 +30,7 @@
                 <div class="flex items-center">
                     Search: 
                     {{-- <form action="" class="ml-2 flex items-center"> --}}
-                        <input type="text" class="border rounded p-1" placeholder="Search for" name="search" value={{isset($_GET['search'])}}>                   
+                        <input type="text" class="border rounded p-1" placeholder="Search for" name="search" value={{$_GET['search']}}>                   
                         <button type="submit"><i class="fa-solid fa-magnifying-glass p-2 main-bg text-white rounded ml-1"></i></button>
                     </form>
                 </div>
@@ -45,11 +53,13 @@
                         <td class="border-2 text-center">{{$item->id}}</td>
                         <td class="border-2">{{$item->deskripsi}}</td>
                         <td class="border-2 text-center">{{$item->kategori}}</td>
-                        <td class="border-2 text-center">
-                            <div>
-                                <i class="fa-solid fa-pen-to-square text-white warning-bg p-2 rounded"></i>
-                                <i class="fa-solid fa-trash-can text-white danger-bg p-2 rounded"></i>
-                            </div>
+                        <td class="border-2 text-center flex justify-evenly">
+                            <a href={{route('kategori.edit', $item->id)}}><i class="fa-solid fa-pen-to-square text-white warning-bg p-2 rounded"></i></a>
+                            <form action={{route('kategori.destroy', $item->id)}} class="" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button type="submit"><i class="fa-solid fa-trash-can text-white danger-bg p-2 rounded"></i></button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
@@ -59,6 +69,10 @@
         </div>
     </div>
     <script>
+        if (!isset($_GET['paginationValue'])) {
+            $_GET['paginationValue'] = '1'
+        }
+
         var paginationValue = "100";
         var paginationForm = document.getElementById('paginationForm');
 
