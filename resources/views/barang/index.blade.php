@@ -1,8 +1,9 @@
 @extends('layout.mainLayout')
 
-@section('title', 'Kategori')
+@section('title', 'Barang')
 
 @section('content')
+    {{-- {{dd($kategori)}} --}}
     @php
         if(!isset($_GET['paginationValue'])){
             $_GET['paginationValue'] = '4';
@@ -12,12 +13,12 @@
         };
     @endphp
     <div class="bg-white border shadow-lg">
-        <div class="text-main font-bold secondary-bg p-4">Tabel Kategori</div>
+        <div class="text-main font-bold secondary-bg p-4">Tabel Barang</div>
         <div class="p-4">
             <div class="flex justify-between">
                 <div class="flex items-center">
                     Show
-                    <form id="paginationForm" action={{route('kategori.index')}} method="GET" class="mx-2">
+                    <form id="paginationForm" action={{route('barang.index')}} method="GET" class="mx-2">
                         <select name="paginationValue" class="border rounded p-1" onchange="getSubmit(this.value)">
                             <option value="1" {{$_GET['paginationValue'] == '1' ? 'selected' : ''}}>1</option>
                             <option value="2" {{$_GET['paginationValue'] == '2' ? 'selected' : ''}}>2</option>
@@ -36,14 +37,17 @@
                 </div>
             </div>
             <div class="mt-6">
-                <a href={{route('kategori.create')}} class="main-bg text-white p-2 rounded">Tambah Kategori</a>
+                <a href={{route('barang.create')}} class="main-bg text-white p-2 rounded">Tambah Barang</a>
             </div>
             <table class="table-auto border-collapse w-full mt-6">
                 <thead>
                     <tr>
                         <th class="border-2">ID</th>
-                        <th class="border-2">Deskripsi</th>
-                        <th class="border-2">Kategori</th>
+                        <th class="border-2">Merk</th>
+                        <th class="border-2">Seri</th>
+                        <th class="border-2">Spesifikasi</th>
+                        <th class="border-2">Stok</th>
+                        <th class="border-2">Kategori ID</th>
                         <th class="border-2">Action</th>
                     </tr>
                 </thead>
@@ -51,12 +55,19 @@
                     @foreach ($data as $item)
                     <tr>
                         <td class="border-2 text-center">{{$item->id}}</td>
-                        <td class="border-2">{{$item->deskripsi}}</td>
-                        <td class="border-2 text-center">{{$item->kategori}}</td>
+                        <td class="border-2">{{$item->merk}}</td>
+                        <td class="border-2">{{$item->seri}}</td>
+                        <td class="border-2">{{$item->spesifikasi}}</td>
+                        <td class="border-2 text-center">{{$item->stok}}</td>
+                        <td class="border-2 text-center">
+                            @foreach ($kategori as $kategoriItem)
+                                {{$kategoriItem->id == $item->kategori_id ? $kategoriItem->deskripsi : ''}}
+                            @endforeach
+                        </td>
                         <td class="border-2 text-center">
                             <div class="flex justify-evenly">
-                                <a href={{route('kategori.edit', $item->id)}}><i class="fa-solid fa-pen-to-square text-white warning-bg p-2 rounded"></i></a>
-                                <form action={{route('kategori.destroy', $item->id)}} method='POST'>
+                                <a href={{route('barang.edit', $item->id)}}><i class="fa-solid fa-pen-to-square text-white warning-bg p-2 rounded"></i></a>
+                                <form action={{route('barang.destroy', $item->id)}} method='POST'>
                                     @csrf
                                     @method('delete')
                                     <button type="submit"><i class="fa-solid fa-trash-can text-white danger-bg p-2 rounded"></i></button>
@@ -70,19 +81,4 @@
             <div class="mt-6">{{$data->links()}}</div>
         </div>
     </div>
-    <script>
-        var paginationValue = "100";
-        var paginationForm = document.getElementById('paginationForm');
-
-        for(var i, j = 0; i = paginationForm.options[j]; j++) {
-            if(i.value == paginationValue) {
-                paginationForm.selectedIndex = j;
-                break;
-            }
-        }
-
-        function getSubmit(value){
-            document.getElementById("paginationForm").submit();
-        }
-    </script>
 @endsection

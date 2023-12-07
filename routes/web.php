@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\BarangController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,4 @@ Route::get('/dashboard', function(){
 });
 
 Route::resource('kategori', KategoriController::class);
+Route::resource('barang', BarangController::class);
