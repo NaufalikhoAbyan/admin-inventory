@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +14,7 @@
         <div class="main-bg grow-0 text-white p-4 h-screen">
             <div class="text-2xl text-center">ADMIN INVENTORY</div>
             <hr class="my-4">
+            
             <div><i class="fa-solid fa-gauge"></i> Dashboard</div>
             <hr class="my-4">
             <div class="text-xs opacity-60 font-bold">TABEL</div>
@@ -32,7 +34,10 @@
                     <div class="ml-6">Register</div>
                 </div>
             </div>
-            @yield('content')
+            
+            <div class="p-4">
+                @yield('content')
+            </div>
         </div>  
     </div>
     
