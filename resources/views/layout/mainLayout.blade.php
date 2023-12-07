@@ -1,4 +1,5 @@
-    <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,13 +14,14 @@
         <div class="main-bg grow-0 text-white p-4 h-screen">
             <div class="text-2xl text-center">ADMIN INVENTORY</div>
             <hr class="my-4">
-            <div><a href="/dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</a></div>
+            
+            <div><i class="fa-solid fa-gauge"></i> Dashboard</div>
             <hr class="my-4">
             <div class="text-xs opacity-60 font-bold">TABEL</div>
-            <div class="mt-3"><a href="/kategori"><i class="fa-solid fa-table"></i> Kategori</a></div>
-            <div class="mt-3"><a href="/barang"><i class="fa-solid fa-table"></i> Barang</a></div>
-            <div class="mt-3"><a href="/barangmasuk"><i class="fa-solid fa-table"></i> BarangMasuk</a></div>
-            <div class="mt-3"><a href="/barangkeluar"><i class="fa-solid fa-table"></i> BarangKeluar</a></div>
+            <div class="mt-3"><i class="fa-solid fa-table"></i> Kategori</div>
+            <div class="mt-3"><i class="fa-solid fa-table"></i> Barang</div>
+            <div class="mt-3"><i class="fa-solid fa-table"></i> Barang Masuk</div>
+            <div class="mt-3"><i class="fa-solid fa-table"></i> Barang Keluar</div>
         </div>
         <div class="grow">
             <div class="h-fit bg-white p-6 flex shadow-lg">
@@ -32,6 +34,7 @@
                     <div class="ml-6">Register</div>
                 </div>
             </div>
+            
             <div class="p-4">
                 @yield('content')
             </div>
