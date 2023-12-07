@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 
 class KategoriController extends Controller
 {
@@ -14,7 +13,7 @@ class KategoriController extends Controller
     public function index(Request $request)
     {
         $search = $request->search ?? '';
-        $paginationValue = $request->paginationValue ?? 1;
+        $paginationValue = $request->paginationValue ?? 4;
         return view('kategori.index', [
             'data' => Kategori::where('kategori', 'like', "%$search%")->orWhere('deskripsi', 'like', "%$search%")->paginate($paginationValue)->withQueryString()
         ]);
@@ -52,32 +51,24 @@ class KategoriController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kategori $kategori)
+    public function edit(string $id)
     {
-        return view('kategori.edit', [
-            'data' => $kategori
-        ]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Kategori $kategori)
+    public function update(Request $request, string $id)
     {
-        $kategori->update($request->validate([
-            'deskripsi' => 'required',
-            'kategori' => 'required'
-        ]));
-
-        return redirect()->route('kategori.index')->with('success', 'Data kategori telah diperbaharui!');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kategori $kategori)
+    public function destroy(string $id)
     {
-        $kategori->delete();
-        return redirect()->route('kategori.index')->with('success', 'Data kategori telah dihapus!');
+        //
     }
 }
