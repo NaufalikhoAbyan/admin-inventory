@@ -33,4 +33,8 @@
     .body-bg{
         background-color: rgb(247, 248, 251);
     }
+
+    .text-xxl{
+        font-size: 5rem;
+    }
 }

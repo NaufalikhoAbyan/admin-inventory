@@ -22,16 +22,29 @@
             <div class="mt-3"><a href="/barang"><i class="fa-solid fa-table"></i> Barang</a></div>
             <div class="mt-3"><a href="/barangmasuk"><i class="fa-solid fa-table"></i> Barang Masuk</a></div>
             <div class="mt-3"><a href="/barangkeluar"><i class="fa-solid fa-table"></i> Barang Keluar</a></div>
+            @auth
+            <hr class="my-4">
+            <form action={{route('login.destroy', auth()->user()->name)}} method='POST'>
+                @csrf
+                @method('delete')
+                <button type="submit"><i class="fa-solid fa-power-off"></i> logout</button>
+            </form>
+            @endauth
         </div>
         <div class="grow">
-            <div class="h-fit bg-white p-6 flex shadow-lg">
+            <div class="h-fit bg-white p-6 flex shadow-lg items-center">
                 <div class="w-full flex">
                     <div class="w-1/3"><input class="body-bg p-2 rounded-l w-full" type="text" placeholder="Search for"></div>
                     <div class="text-white main-bg flex items-center rounded-r"><i class="fa-solid fa-magnifying-glass p-2"></i></div>
                 </div>
-                <div class="flex items-center ">
-                    <div>Login</div>
-                    <div class="ml-6">Register</div>
+                <div class="flex items-center w-36 text-right h-fit">
+                    @auth
+                        {{auth()->user()->name}}
+                    @endauth
+                    @guest
+                        <div><a href="/login">Login</a></div>
+                        <div class="ml-6"><a href="/register">Register</a></div>
+                    @endguest
                 </div>
             </div>
             
