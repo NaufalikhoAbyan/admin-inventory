@@ -12,6 +12,7 @@
         <div class="grow"></div>
         <div class="grow bg-white flex py-6 px-24 justify-center flex-col">
             <div class="text-xxl">LOGIN</div>
+            @csrf
             @if ($errors->any())
                 <div class="text-red-500">
                     <ul>
