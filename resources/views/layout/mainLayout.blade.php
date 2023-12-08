@@ -43,7 +43,7 @@
                     @endauth
                     @guest
                         <div><a href="/login">Login</a></div>
-                        <div class="ml-6"><a href="/register">Register</a></div>
+                        <div class="ml-6"><a href="/register/create ">Register</a></div>
                     @endguest
                 </div>
             </div>
