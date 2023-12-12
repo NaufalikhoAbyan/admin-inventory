@@ -61,6 +61,7 @@
                         </td>
                         <td class="border-2 text-center">
                             <div class="flex justify-evenly">
+                                <a href={{route('barangmasuk.show', $item->id)}}><i class="fa-regular fa-eye text-white main-bg p-2 rounded"></i></a>
                                 <a href={{route('barangmasuk.edit', $item->id)}}><i class="fa-solid fa-pen-to-square text-white warning-bg p-2 rounded"></i></a>
                                 <form action={{route('barangmasuk.destroy', $item->id)}} method='POST'>
                                     @csrf

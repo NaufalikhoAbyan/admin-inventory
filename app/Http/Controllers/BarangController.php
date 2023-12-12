@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class BarangController extends Controller
 {
@@ -50,9 +51,11 @@ class BarangController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Barang $barang)
     {
-        //
+        return view('barang.show', [
+            'data' => $barang
+        ]);
     }
 
     /**
@@ -87,7 +90,16 @@ class BarangController extends Controller
      */
     public function destroy(Barang $barang)
     {
-        $barang->delete();
+        try {
+            $barang->delete();
+        }
+
+        catch (QueryException $e){
+            if($e->getCode() === '23000') {
+                return redirect()->route('barang.index')->withErrors(['msg' => 'Data barang digunakan di tabel lain!']);
+            }
+        }
+        
         return redirect()->route('barang.index')->with('success', 'Data barang berhasil dihapus!');
 
     }

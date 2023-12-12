@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->date('tgl_masuk');
             $table->tinyInteger('qty_masuk');
-            $table->foreignId('barang_id')->references('id')->on('barang')->cascadeOnDelete();
+            $table->foreignId('barang_id')->references('id')->on('barang')->restrictOnDelete();
         });
     }
 
