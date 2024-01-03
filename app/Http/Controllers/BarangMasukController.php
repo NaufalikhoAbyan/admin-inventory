@@ -48,9 +48,11 @@ class BarangMasukController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(BarangMasuk $barangmasuk)
     {
-        //
+        return view('barangmasuk.show', [
+            'data' => $barangmasuk
+        ]);
     }
 
     /**

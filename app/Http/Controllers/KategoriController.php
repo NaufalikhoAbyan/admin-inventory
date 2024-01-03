@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
@@ -45,7 +46,9 @@ class KategoriController extends Controller
      */
     public function show(Kategori $kategori)
     {
-        //
+        return view('kategori.show', [
+            'data' => $kategori
+        ]);
     }
 
     /**
@@ -75,7 +78,16 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        $kategori->delete();
+        try {
+            $kategori->delete();
+        }
+
+        catch (QueryException $e){
+            if($e->getCode() === '23000') {
+                return redirect()->route('kategori.index')->withErrors(['msg' => 'Data Kategori digunakan di tabel lain!']);
+            }
+        }
+
         return redirect()->route('kategori.index')->with('success', 'Data kategori telah dihapus!');
     }
 }

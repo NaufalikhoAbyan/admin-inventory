@@ -39,6 +39,15 @@
             <div class="mt-6">
                 <a href={{route('barang.create')}} class="main-bg text-white p-2 rounded">Tambah Barang</a>
             </div>
+            @if ($errors->any())
+                <div class="text-red-500 mt-6">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <table class="table-auto border-collapse w-full mt-6">
                 <thead>
                     <tr>
@@ -66,6 +75,7 @@
                         </td>
                         <td class="border-2 text-center">
                             <div class="flex justify-evenly">
+                                <a href={{route('barang.show', $item->id)}}><i class="fa-regular fa-eye text-white main-bg p-2 rounded"></i></a>
                                 <a href={{route('barang.edit', $item->id)}}><i class="fa-solid fa-pen-to-square text-white warning-bg p-2 rounded"></i></a>
                                 <form action={{route('barang.destroy', $item->id)}} method='POST'>
                                     @csrf

@@ -48,9 +48,11 @@ class BarangKeluarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(BarangKeluar $barangkeluar)
     {
-        //
+        return view('barangkeluar.show' , [
+            'data' => $barangkeluar
+        ]);
     }
 
     /**
