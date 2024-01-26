@@ -23,14 +23,14 @@
                             <option value="2" {{$_GET['paginationValue'] == '2' ? 'selected' : ''}}>2</option>
                             <option value="3" {{$_GET['paginationValue'] == '3' ? 'selected' : ''}}>3</option>
                             <option value="4" {{$_GET['paginationValue'] == '4' ? 'selected' : ''}}>4</option>
-                        </select> 
+                        </select>
                     {{-- </form> --}}
-                    entries 
+                    entries
                 </div>
                 <div class="flex items-center">
-                    Search: 
+                    Search:
                     {{-- <form action="" class="ml-2 flex items-center"> --}}
-                        <input type="text" class="border rounded p-1" placeholder="Search for" name="search" value={{$_GET['search']}}>                   
+                        <input type="text" class="border rounded p-1" placeholder="Search for" name="search" value={{$_GET['search']}}>
                         <button type="submit"><i class="fa-solid fa-magnifying-glass p-2 main-bg text-white rounded ml-1"></i></button>
                     </form>
                 </div>
@@ -61,7 +61,12 @@
                     <tr>
                         <td class="border-2 text-center">{{$item->id}}</td>
                         <td class="border-2">{{$item->deskripsi}}</td>
-                        <td class="border-2 text-center">{{$item->kategori}}</td>
+                        <td class="border-2 text-center">
+                            @if($item->kategori == "BTHP") Barang Tidak Habis Pakai @endif
+                            @if($item->kategori == "BHP") Barang Habis Pakai @endif
+                            @if($item->kategori == "M") Modal @endif
+                            @if($item->kategori == "A") Alat @endif
+                        </td>
                         <td class="border-2 text-center">
                             <div class="flex justify-evenly">
                                 <a href={{route('kategori.show', $item->id)}}><i class="fa-regular fa-eye text-white main-bg p-2 rounded"></i></a>
